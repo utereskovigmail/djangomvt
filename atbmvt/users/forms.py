@@ -1,6 +1,7 @@
 from django import forms
 from .models import CustomUser
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
@@ -53,3 +54,21 @@ class CustomUserCreationForm(UserCreationForm):
         if CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError("Дана пошта уже зареєстрована")
         return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Паролі не співпадають.")
+        return password2
+
+class CustomUserLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Логін",
+        widget=forms.TextInput(attrs={'class': "form-control"})
+    )
+    password = forms.CharField(
+        label="Пароль",
+        widget=forms.PasswordInput(attrs={"class": "form-control"})
+    )

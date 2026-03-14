@@ -19,12 +19,20 @@ from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
+    path("users/", include(("users.urls", "users"), namespace="users")),
     path('categories/', include('categories.urls')),
     path('', views.homepage, name='homepage'),
+
+    path("reset-password/", auth_views.PasswordResetView.as_view(template_name="password-reset/password_reset.html"), name='reset_password'),
+    path("reset-password-sent/", auth_views.PasswordResetDoneView.as_view(template_name='password-reset/password_reset_sent.html'),name='password_reset_done'),
+    path("reset-password/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(template_name='password-reset/password_reset_confirm.html'), name='password_reset_confirm'),
+    path("reset-password-complete/", auth_views.PasswordResetCompleteView.as_view(template_name='password-reset/password_reset_complete.html'), name='password_reset_complete'),
+
+
 ]
 
 urlpatterns+=static(settings.IMAGES_URL, document_root=settings.IMAGES_ROOT)
