@@ -31,12 +31,14 @@
 
                     <h5 class="card-title">{{ category.name }}</h5>
 
-                    <p class="card-text text-muted">
-                        {{ category.description|default:"No description" }}
-                    </p>
+{#                    <p class="card-text text-muted">#}
+{#                        {{ category.description|default:"No description" }}#}
+{#                    </p>#}
 
-                    <div class="mt-auto">
-                        <a href="#" class="btn btn-outline-primary w-100">
+                     <div class="mt-auto">
+                        <a class="btn btn-outline-primary w-100"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modal-{{ product.id }}">
                             View
                         </a>
                     </div>
@@ -45,6 +47,42 @@
             </div>
 
         </div>
+
+            <div class="modal fade" id="modal-{{ product.id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-3">
+
+                        <div class="d-flex justify-content-between">
+                            <h5>{{ category.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <hr>
+
+                        <p>{{ category.description|default:"No description" }}</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-{{ product.id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-3">
+
+                        <div class="d-flex justify-content-between">
+                            <h5>{{ product.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <hr>
+
+                        <p>{{ product.description|default:"No description" }}</p>
+
+                    </div>
+                </div>
+            </div>
+
+
         {% empty %}
         <div class="col-12">
             <div class="alert alert-info text-center">
