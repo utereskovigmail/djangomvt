@@ -5,4 +5,5 @@ app_name = 'categories'
 
 urlpatterns = [
     path('add/', views.add_category, name="add"),
+    path('', views.category_list, name='category_list'),
 ]

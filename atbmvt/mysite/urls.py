@@ -26,6 +26,8 @@ urlpatterns = [
     path("users/", include(("users.urls", "users"), namespace="users")),
     path('categories/', include('categories.urls')),
     path('', views.homepage, name='homepage'),
+    path('products/', include('products.urls')),
+    path('', views.homepage, name='homepage'),
 
     path("reset-password/", auth_views.PasswordResetView.as_view(template_name="password-reset/password_reset.html"), name='reset_password'),
     path("reset-password-sent/", auth_views.PasswordResetDoneView.as_view(template_name='password-reset/password_reset_sent.html'),name='password_reset_done'),
@@ -35,4 +37,4 @@ urlpatterns = [
 
 ]
 
-urlpatterns+=static(settings.IMAGES_URL, document_root=settings.IMAGES_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

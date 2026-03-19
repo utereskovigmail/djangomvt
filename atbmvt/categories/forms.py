@@ -30,9 +30,15 @@ class CategoryForm(forms.ModelForm):
         })
     )
 
+    slug = forms.SlugField(
+        label="Slug",
+        required=False,
+        widget=forms.TextInput(attrs={})
+    )
+
     class Meta:
         model = Category
-        fields = ('name', 'description', 'image')
+        fields = ('name', 'description', 'image', 'slug')
 
     def clean_name(self):
         name = self.cleaned_data.get('name')

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     # 'users'
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig',
+    'products',
+    'widget_tweaks'
 
 ]
 
@@ -139,9 +141,8 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-IMAGES_URL = '/images/'
-
-IMAGES_ROOT = BASE_DIR / 'images'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]

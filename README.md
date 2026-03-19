@@ -74,3 +74,9 @@ cd atbmvt
 py manage.py runserver 9581
 ```
 
+## Migrations:
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
